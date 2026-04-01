@@ -1,0 +1,10 @@
+Example of URLs that are analyzed.
+
+https://example.com/static/app.js
+https://example.com/static/runtime.js
+https://example.com/static/vendor.js
+https://example.com/_next/static/chunks/main.js
+https://example.com/_next/static/chunks/app.js
+https://cdn.example.com/assets/main.bundle.js
+https://cdn.example.com/assets/vendors.bundle.js
+https://api.example.com/js/client.js
