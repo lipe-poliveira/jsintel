@@ -1,6 +1,6 @@
-# jsinte
+# jsintel
 
-`jsinte` is a lightweight JavaScript reconnaissance CLI for bug bounty hunters and security researchers.
+`jsintel` is a lightweight JavaScript reconnaissance CLI for bug bounty hunters and security researchers.
 
 It helps identify useful front-end signals such as:
 
