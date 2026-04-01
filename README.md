@@ -41,8 +41,8 @@ The tool is designed for **authorized security testing** and fits well into Unix
 
 ### Install with Go
 
-```bash```
-go install github.com/lipe-poliveira/jsinte@latest
+###bash
+```go install github.com/lipe-poliveira/jsinte@latest```
 
 
 ```Functional examples```
