@@ -4,6 +4,19 @@
 
 It helps researchers move from *"I found some JS files"* to *"I found sourcemaps, hidden endpoints, framework fingerprints, auth hints, and secret candidates worth triaging."*
 
+## Installation
+
+### Install with Go
+
+``bash
+go install github.com/lipe-poliveira/jsinte@latest
+
+export PATH="$PATH:$HOME/go/bin
+
+git clone https://github.com/lipe-poliveira/jsintel.git
+cd jsinte
+go build -o jsintel .
+
 ## Features
 
 - Analyze either:
