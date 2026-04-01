@@ -106,30 +106,30 @@ var (
 
 func main() {
 	var (
-		singleURL    = flag.String("u", "", "alvo unico")
-		listFile     = flag.String("l", "", "arquivo com lista de entradas")
-		inputTypeRaw = flag.String("type", "auto", "tipo de entrada: auto|target|js")
-		concurrency  = flag.Int("c", 20, "numero de workers")
-		timeout      = flag.Duration("timeout", 8*time.Second, "timeout HTTP")
-		maxBody      = flag.Int64("max-body", 2*1024*1024, "limite de bytes por resposta")
-		insecure     = flag.Bool("k", true, "desabilita verificacao rigorosa de TLS")
-		noInfo       = flag.Bool("no-info", false, "omite findings com severidade info")
+		singleURL    = flag.String("u", "", "single target")
+		listFile     = flag.String("l", "", "input file")
+		inputTypeRaw = flag.String("type", "auto", "input type: auto|target|js")
+		concurrency  = flag.Int("c", 20, "worker concurrency")
+		timeout      = flag.Duration("timeout", 8*time.Second, "HTTP timeout")
+		maxBody      = flag.Int64("max-body", 2*1024*1024, "maximum response body size")
+		insecure     = flag.Bool("k", true, "disable strict TLS verification")
+		noInfo       = flag.Bool("no-info", false, "omit info-level findings")
 	)
 	flag.Parse()
 
 	inputType := parseInputType(*inputTypeRaw)
 	if inputType == "" {
-		fmt.Fprintln(os.Stderr, "valor invalido em -type; use auto|target|js")
+		fmt.Fprintln(os.Stderr, "invalid -type value; use auto|target|js")
 		os.Exit(1)
 	}
 
 	items, err := collectInputs(*singleURL, *listFile, inputType)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "erro ao coletar entradas: %v\n", err)
+		fmt.Fprintf(os.Stderr, "input collection error: %v\n", err)
 		os.Exit(1)
 	}
 	if len(items) == 0 {
-		fmt.Fprintln(os.Stderr, "nenhuma entrada recebida")
+		fmt.Fprintln(os.Stderr, "no input received")
 		os.Exit(1)
 	}
 
@@ -193,7 +193,7 @@ func main() {
 	enc := json.NewEncoder(os.Stdout)
 	for f := range out {
 		if err := enc.Encode(f); err != nil {
-			fmt.Fprintf(os.Stderr, "erro ao serializar JSONL: %v\n", err)
+			fmt.Fprintf(os.Stderr, "JSONL encode error: %v\n", err)
 		}
 	}
 }
@@ -522,7 +522,7 @@ func fetch(client *http.Client, rawURL string, maxBody int64) (*http.Response, [
 	if err != nil {
 		return nil, nil, err
 	}
-	req.Header.Set("User-Agent", "jsintel/0.2")
+	req.Header.Set("User-Agent", "jsinte/0.1")
 
 	resp, err := client.Do(req)
 	if err != nil {
